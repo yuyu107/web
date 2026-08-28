@@ -5,74 +5,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>游戏直播 - 多玩我的世界盒子</title>
 <style type="text/css">
-html,body{margin:0;padding:0;width:100%;height:100%;background:#171717;color:#aaa;font-family:"Microsoft YaHei",Arial,sans-serif;font-size:14px;overflow-x:hidden;}
-a{color:inherit;text-decoration:none;}
-#page{padding:22px 30px 35px 30px;min-width:720px;}
-.section-head{height:42px;line-height:34px;border-bottom:1px solid #2d2d2d;margin-bottom:20px;position:relative;}
-.section-title{font-size:22px;color:#bdbdbd;font-weight:normal;}
-.section-tools{position:absolute;right:2px;top:0;height:34px;line-height:34px;color:#b4b4b4;font-size:16px;}
-.section-tools a:hover{color:#fff;}
-.refresh{display:inline-block;margin-right:18px;cursor:pointer;}
-.refresh-icon{font-size:20px;vertical-align:-1px;margin-right:6px;color:#a9a9a9;}
-.arrow{margin-left:7px;color:#777;font-size:20px;vertical-align:-1px;}
-#featured{height:400px;overflow:hidden;margin-bottom:18px;}
-#feature-main{float:left;width:71%;height:400px;background:#222;position:relative;overflow:hidden;}
-#feature-side{float:right;width:27.5%;height:400px;background:#222;position:relative;overflow:hidden;}
-.feature-link{display:block;width:100%;height:100%;position:relative;background:#222;overflow:hidden;}
-.feature-link img{display:block;width:100%;height:100%;border:0;}
-.feature-shade{position:absolute;left:0;right:0;bottom:0;height:90px;background:#111;filter:alpha(opacity=82);opacity:.82;}
-.feature-text{position:absolute;left:18px;right:18px;bottom:13px;color:#fff;z-index:2;}
-.feature-room{font-size:18px;line-height:27px;height:27px;overflow:hidden;white-space:nowrap;}
-.feature-meta{color:#bbb;line-height:25px;height:25px;overflow:hidden;white-space:nowrap;}
-.feature-side .feature-room{font-size:16px;}
-.feature-side .feature-text{left:13px;right:13px;bottom:11px;}
-.empty-block{width:100%;height:100%;background:#222;position:relative;}
-.empty-text{position:absolute;left:0;right:0;top:46%;text-align:center;color:#666;font-size:16px;}
-.live-head{height:45px;line-height:36px;border-bottom:1px solid #2d2d2d;margin-top:3px;margin-bottom:18px;}
-.live-head span{font-size:22px;color:#bdbdbd;}
-#live-grid{margin-right:-16px;zoom:1;}
-#live-grid:after{content:"";display:block;clear:both;}
-.live-card{float:left;width:24%;margin-right:1%;margin-bottom:20px;background:#202020;overflow:hidden;min-height:180px;}
-.live-card a{display:block;cursor:pointer;}
-.thumb{height:135px;background:#252525;position:relative;overflow:hidden;}
-.thumb img{display:block;width:100%;height:135px;border:0;}
-.view-badge{position:absolute;right:7px;bottom:7px;padding:2px 6px;background:#111;color:#ddd;font-size:12px;filter:alpha(opacity=82);opacity:.82;}
-.card-body{padding:9px 10px 10px 10px;}
-.card-title{color:#ddd;font-size:14px;height:22px;line-height:22px;overflow:hidden;white-space:nowrap;}
-.card-meta{color:#7f7f7f;font-size:12px;height:21px;line-height:21px;overflow:hidden;white-space:nowrap;}
-.live-card a:hover .card-title{color:#f0a330;}
-#status{height:42px;line-height:42px;color:#777;font-size:14px;}
-#error-box{display:none;border:1px solid #333;background:#1d1d1d;color:#999;padding:20px;margin-top:8px;line-height:26px;}
-#error-box a{color:#d6a15d;margin-right:22px;}
-.version{position:fixed;right:8px;bottom:5px;color:#333;font-size:11px;}
-@media screen and (max-width:900px){#page{padding-left:22px;padding-right:22px;min-width:650px;}#featured{height:330px;}#feature-main,#feature-side{height:330px;}.live-card{width:32.2%;margin-right:1.1%;}}
+html,body{margin:0;padding:0;width:100%;height:100%;background:#171717;color:#aaa;font-family:"Microsoft YaHei",Arial,sans-serif;font-size:14px;overflow-x:hidden;}a{color:inherit;text-decoration:none;}#page{padding:22px 30px 35px 30px;min-width:720px;}.section-head{height:42px;line-height:34px;border-bottom:1px solid #2d2d2d;margin-bottom:20px;position:relative;}.section-title{font-size:22px;color:#bdbdbd;font-weight:normal;}.section-tools{position:absolute;right:2px;top:0;height:34px;line-height:34px;color:#b4b4b4;font-size:16px;}.section-tools a:hover{color:#fff;}.refresh{display:inline-block;margin-right:18px;cursor:pointer;}.refresh-icon{font-size:20px;vertical-align:-1px;margin-right:6px;color:#a9a9a9;}.arrow{margin-left:7px;color:#777;font-size:20px;vertical-align:-1px;}#featured{height:400px;overflow:hidden;margin-bottom:18px;}#feature-main{float:left;width:71%;height:400px;background:#222;position:relative;overflow:hidden;}#feature-side{float:right;width:27.5%;height:400px;background:#222;position:relative;overflow:hidden;}.feature-link{display:block;width:100%;height:100%;position:relative;background:#222;overflow:hidden;}.feature-link img{display:block;width:100%;height:100%;border:0;}.feature-shade{position:absolute;left:0;right:0;bottom:0;height:90px;background:#111;filter:alpha(opacity=82);opacity:.82;}.feature-text{position:absolute;left:18px;right:18px;bottom:13px;color:#fff;z-index:2;}.feature-room{font-size:18px;line-height:27px;height:27px;overflow:hidden;white-space:nowrap;}.feature-meta{color:#bbb;line-height:25px;height:25px;overflow:hidden;white-space:nowrap;}.feature-side .feature-room{font-size:16px;}.feature-side .feature-text{left:13px;right:13px;bottom:11px;}.empty-block{width:100%;height:100%;background:#222;position:relative;}.empty-text{position:absolute;left:0;right:0;top:46%;text-align:center;color:#666;font-size:16px;}.live-head{height:45px;line-height:36px;border-bottom:1px solid #2d2d2d;margin-top:3px;margin-bottom:18px;}.live-head span{font-size:22px;color:#bdbdbd;}#live-grid{margin-right:-16px;zoom:1;}#live-grid:after{content:"";display:block;clear:both;}.live-card{float:left;width:24%;margin-right:1%;margin-bottom:20px;background:#202020;overflow:hidden;min-height:180px;}.live-card a{display:block;cursor:pointer;}.thumb{height:135px;background:#252525;position:relative;overflow:hidden;}.thumb img{display:block;width:100%;height:135px;border:0;}.view-badge{position:absolute;right:7px;bottom:7px;padding:2px 6px;background:#111;color:#ddd;font-size:12px;filter:alpha(opacity=82);opacity:.82;}.card-body{padding:9px 10px 10px 10px;}.card-title{color:#ddd;font-size:14px;height:22px;line-height:22px;overflow:hidden;white-space:nowrap;}.card-meta{color:#7f7f7f;font-size:12px;height:21px;line-height:21px;overflow:hidden;white-space:nowrap;}.live-card a:hover .card-title{color:#f0a330;}#status{height:42px;line-height:42px;color:#777;font-size:14px;}#error-box{display:none;border:1px solid #333;background:#1d1d1d;color:#999;padding:20px;margin-top:8px;line-height:26px;}#error-box a{color:#d6a15d;margin-right:22px;}.version{position:fixed;right:8px;bottom:5px;color:#333;font-size:11px;}@media screen and (max-width:900px){#page{padding-left:22px;padding-right:22px;min-width:650px;}#featured{height:330px;}#feature-main,#feature-side{height:330px;}.live-card{width:32.2%;margin-right:1.1%;}}
 </style>
 <script type="text/javascript">
-var mcboxLoaded=false;
-var mcboxTimer=null;
+var mcboxLoaded=false;var mcboxTimer=null;
 function htmlEscape(s){s=(s===null||typeof s==='undefined')?'':String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');}
-function roomUrl(item){var room=item.profileRoom||item.privateHost||'';if(!room){return 'https://www.huya.com/g/1732';}return 'https://www.huya.com/'+encodeURIComponent(room);}
+function enc(s){return encodeURIComponent((s===null||typeof s==='undefined')?'':String(s));}
 function coverUrl(item){return item.screenshot||item.screenshotUrl||item.game_screenshot||'';}
 function roomTitle(item){return item.roomName||item.introduction||item.room_name||'我的世界直播';}
 function nickName(item){return item.nick||item.nickName||item.anchorName||'虎牙主播';}
 function viewerText(n){if(n===null||typeof n==='undefined'||n==='')return '';var x=parseInt(n,10);if(isNaN(x))return String(n);if(x>=10000){return (Math.round(x/1000)/10)+'万';}return String(x);}
+function streamId(item){var s=item.streamName||item.stream_name||item.sStreamName||'';if(!s&&item.privateHost&&String(item.privateHost).indexOf('-')>0){s=item.privateHost;}return s;}
+function roomId(item){return item.profileRoom||item.privateHost||item.roomId||item.room_id||item.uid||'';}
+function roomUrl(item){return 'room.html?room='+enc(roomId(item))+'&stream='+enc(streamId(item))+'&title='+enc(roomTitle(item))+'&nick='+enc(nickName(item))+'&count='+enc(viewerText(item.totalCount))+'&cover='+enc(coverUrl(item));}
 function featureHtml(item){if(!item)return '<div class="empty-block"><div class="empty-text">暂无推荐直播</div></div>';var img=coverUrl(item);return '<a class="feature-link" href="'+roomUrl(item)+'" title="'+htmlEscape(roomTitle(item))+'">'+(img?'<img src="'+htmlEscape(img)+'" alt="" />':'')+'<span class="feature-shade"></span><span class="feature-text"><span class="feature-room">'+htmlEscape(roomTitle(item))+'</span><br /><span class="feature-meta">'+htmlEscape(nickName(item))+(viewerText(item.totalCount)?'　'+viewerText(item.totalCount)+'人气':'')+'</span></span></a>';}
 function cardHtml(item){var img=coverUrl(item);return '<div class="live-card"><a href="'+roomUrl(item)+'" title="'+htmlEscape(roomTitle(item))+'"><div class="thumb">'+(img?'<img src="'+htmlEscape(img)+'" alt="" />':'')+(viewerText(item.totalCount)?'<span class="view-badge">'+viewerText(item.totalCount)+'</span>':'')+'</div><div class="card-body"><div class="card-title">'+htmlEscape(roomTitle(item))+'</div><div class="card-meta">'+htmlEscape(nickName(item))+'</div></div></a></div>';}
-function renderRooms(datas){if(!datas||!datas.length){showError('接口已返回，但没有取得直播间。');return;}mcboxLoaded=true;if(mcboxTimer){window.clearTimeout(mcboxTimer);}document.getElementById('feature-main').innerHTML=featureHtml(datas[0]);document.getElementById('feature-side').innerHTML=featureHtml(datas[1]||datas[0]);var html='';var start=datas.length>2?2:0;var max=Math.min(datas.length,start+12);for(var i=start;i<max;i++){html+=cardHtml(datas[i]);}document.getElementById('live-grid').innerHTML=html;document.getElementById('status').style.display='none';document.getElementById('error-box').style.display='none';}
+function renderRooms(datas){if(!datas||!datas.length){showError('接口已返回，但没有取得直播间。');return;}mcboxLoaded=true;if(mcboxTimer){window.clearTimeout(mcboxTimer);}document.getElementById('feature-main').innerHTML=featureHtml(datas[0]);document.getElementById('feature-side').innerHTML=featureHtml(datas[1]||datas[0]);var html='';var start=datas.length>2?2:0;var max=Math.min(datas.length,start+16);for(var i=start;i<max;i++){html+=cardHtml(datas[i]);}document.getElementById('live-grid').innerHTML=html;document.getElementById('status').style.display='none';document.getElementById('error-box').style.display='none';}
 function mcboxLiveCallback(obj){try{var datas=null;if(obj&&obj.data){datas=obj.data.datas||obj.data.list||obj.data;}renderRooms(datas);}catch(e){showError('直播数据解析失败。');}}
 function showError(msg){if(mcboxLoaded)return;document.getElementById('status').style.display='none';var box=document.getElementById('error-box');box.style.display='block';document.getElementById('error-message').innerHTML=htmlEscape(msg||'暂时无法取得直播数据。');}
 function loadLive(){mcboxLoaded=false;document.getElementById('status').style.display='block';document.getElementById('status').innerHTML='正在加载虎牙《我的世界》直播...';document.getElementById('error-box').style.display='none';document.getElementById('feature-main').innerHTML='<div class="empty-block"><div class="empty-text">加载中...</div></div>';document.getElementById('feature-side').innerHTML='<div class="empty-block"><div class="empty-text">加载中...</div></div>';document.getElementById('live-grid').innerHTML='';var old=document.getElementById('huya-jsonp');if(old&&old.parentNode){old.parentNode.removeChild(old);}var sc=document.createElement('script');sc.type='text/javascript';sc.charset='utf-8';sc.id='huya-jsonp';sc.src='https://www.huya.com/cache.php?m=LiveList&do=getLiveListByPage&gameId=1732&tagAll=0&callback=mcboxLiveCallback&page=1&_='+(new Date().getTime());document.getElementsByTagName('head')[0].appendChild(sc);if(mcboxTimer){window.clearTimeout(mcboxTimer);}mcboxTimer=window.setTimeout(function(){if(!mcboxLoaded){showError('直播页已经从 GitHub 成功加载，但虎牙直播列表获取超时。');}},10000);}
 </script>
 </head>
-<body onload="loadLive()">
-<div id="page">
-  <div class="section-head"><span class="section-title">虎牙直播</span><span class="section-tools"><span class="refresh" onclick="loadLive();return false;"><span class="refresh-icon">↻</span>刷新</span><a href="https://www.huya.com/g/1732">查看全部<span class="arrow">›</span></a></span></div>
-  <div id="featured"><div id="feature-main"><div class="empty-block"><div class="empty-text">加载中...</div></div></div><div id="feature-side"><div class="empty-block"><div class="empty-text">加载中...</div></div></div></div>
-  <div class="live-head"><span>游戏直播</span></div>
-  <div id="status">正在加载虎牙《我的世界》直播...</div>
-  <div id="error-box"><div id="error-message">暂时无法取得直播数据。</div><a href="javascript:loadLive();">重新加载</a><a href="https://www.huya.com/g/1732">在虎牙查看全部</a></div>
-  <div id="live-grid"></div>
-</div>
-<div class="version">GitHub live test v5</div>
-</body>
+<body onload="loadLive()"><div id="page"><div class="section-head"><span class="section-title">虎牙直播</span><span class="section-tools"><span class="refresh" onclick="loadLive();return false;"><span class="refresh-icon">↻</span>刷新</span><a href="./">查看全部<span class="arrow">›</span></a></span></div><div id="featured"><div id="feature-main"><div class="empty-block"><div class="empty-text">加载中...</div></div></div><div id="feature-side"><div class="empty-block"><div class="empty-text">加载中...</div></div></div></div><div class="live-head"><span>游戏直播</span></div><div id="status">正在加载虎牙《我的世界》直播...</div><div id="error-box"><div id="error-message">暂时无法取得直播数据。</div><a href="javascript:loadLive();">重新加载</a><a href="./">查看全部直播</a></div><div id="live-grid"></div></div><div class="version">GitHub live test v5.2</div></body>
 </html>
