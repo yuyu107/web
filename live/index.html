@@ -15,7 +15,7 @@ var mcboxLoaded=false,mcboxTimer=null,isAllMode=false,currentPage=1,totalPage=1,
 function htmlEscape(s){s=(s===null||typeof s==='undefined')?'':String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;')}
 function enc(s){return encodeURIComponent((s===null||typeof s==='undefined')?'':String(s))}
 function queryValue(name){var q=location.search.replace(/^\?/,'').split('&'),i,p,k,v;for(i=0;i<q.length;i++){if(!q[i])continue;p=q[i].split('=');k=decodeURIComponent(p[0]||'');if(k===name){v=decodeURIComponent((p.slice(1).join('=')||'').replace(/\+/g,' '));return v}}return ''}
-function initMode(){isAllMode=queryValue('all')==='1';var p=parseInt(queryValue('page'),10);currentPage=(!isNaN(p)&&p>0)?p:1;if(isAllMode){document.body.className='all-mode';document.getElementById('head-title').innerHTML='全部直播';document.getElementById('head-action').innerHTML='返回推荐<span class="arrow">›</span>';document.getElementById('head-action').href='./';document.getElementById('live-title').innerHTML='我的世界直播';}else{document.getElementById('head-title').innerHTML='虎牙直播';document.getElementById('head-action').innerHTML='查看全部<span class="arrow">›</span>';document.getElementById('head-action').href='?all=1&page=1';}}
+function initMode(){isAllMode=queryValue('all')==='1';var p=parseInt(queryValue('page'),10);currentPage=(!isNaN(p)&&p>0)?p:1;if(isAllMode){document.body.className='all-mode';document.getElementById('head-title').innerHTML='全部直播';document.getElementById('head-action').innerHTML='返回推荐<span class="arrow">›</span>';document.getElementById('head-action').href='./';document.getElementById('head-action').target='_self';document.getElementById('live-title').innerHTML='我的世界直播'}else{document.getElementById('head-title').innerHTML='虎牙直播';document.getElementById('head-action').innerHTML='查看全部<span class="arrow">›</span>';document.getElementById('head-action').href='https://www.huya.com/g/1732';document.getElementById('head-action').target='_blank';document.getElementById('head-action').title='在浏览器中打开虎牙全部直播'}}
 function coverUrl(item){return item.screenshot||item.screenshotUrl||item.game_screenshot||''}
 function roomTitle(item){return item.roomName||item.introduction||item.room_name||'我的世界直播'}
 function nickName(item){return item.nick||item.nickName||item.anchorName||'虎牙主播'}
@@ -36,7 +36,7 @@ function pageStart(){initMode();loadLive()}
 </head>
 <body onload="pageStart()">
 <div id="page">
-<div class="section-head"><span class="section-title" id="head-title">虎牙直播</span><span class="section-tools"><span class="refresh" onclick="loadLive();return false;"><span class="refresh-icon">↻</span>刷新</span><a id="head-action" href="?all=1&page=1">查看全部<span class="arrow">›</span></a></span></div>
+<div class="section-head"><span class="section-title" id="head-title">虎牙直播</span><span class="section-tools"><span class="refresh" onclick="loadLive();return false;"><span class="refresh-icon">↻</span>刷新</span><a id="head-action" href="https://www.huya.com/g/1732" target="_blank" title="在浏览器中打开虎牙全部直播">查看全部<span class="arrow">›</span></a></span></div>
 <div id="featured"><div id="feature-main"><div class="empty-block"><div class="empty-text">加载中...</div></div></div><div id="feature-side"><div class="empty-block"><div class="empty-text">加载中...</div></div></div></div>
 <div class="live-head"><span id="live-title">游戏直播</span><span id="all-count" class="all-count"></span></div>
 <div id="status">正在加载虎牙《我的世界》直播...</div>
