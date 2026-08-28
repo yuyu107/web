@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>直播间 - 多玩我的世界盒子</title>
+<style type="text/css">
+html,body{margin:0;padding:0;background:#171717;color:#bbb;font-family:"Microsoft YaHei",Arial,sans-serif;font-size:14px;}
+a{color:#d8a15d;text-decoration:none;}
+#page{padding:20px 30px 40px;min-width:700px;}
+.top{height:42px;line-height:34px;border-bottom:1px solid #303030;margin-bottom:18px;position:relative;}
+.back{font-size:16px;color:#aaa;margin-right:20px;}.title{font-size:21px;color:#ddd;}
+.tools{position:absolute;right:0;top:0;}.tools a{margin-left:18px;color:#aaa;}.tools a:hover{color:#fff;}
+.info{height:68px;background:#1d1d1d;border:1px solid #292929;padding:10px 14px;box-sizing:border-box;margin-bottom:12px;}
+.room-title{font-size:20px;color:#eee;height:28px;line-height:28px;overflow:hidden;white-space:nowrap;}.meta{height:24px;line-height:24px;color:#888;}
+#player-wrap{height:540px;background:#000;position:relative;border:1px solid #282828;}
+#video{display:block;width:100%;height:100%;background:#000;}
+#cover{position:absolute;left:0;top:0;width:100%;height:100%;background:#111 center center no-repeat;background-size:cover;}
+#shade{position:absolute;left:0;top:0;width:100%;height:100%;background:#000;filter:alpha(opacity=48);opacity:.48;}
+#message{position:absolute;left:8%;right:8%;top:42%;z-index:5;text-align:center;color:#ddd;font-size:16px;line-height:29px;}
+#message small{display:block;color:#777;font-size:12px;margin-top:5px;}
+.controls{height:46px;line-height:46px;background:#1d1d1d;border:1px solid #292929;border-top:0;padding:0 13px;color:#888;}
+.btn{display:inline-block;padding:0 13px;height:28px;line-height:28px;margin-right:9px;background:#292929;border:1px solid #383838;color:#ccc;cursor:pointer;vertical-align:middle;}.btn:hover{background:#333;color:#fff;}
+#debug{margin-top:16px;padding:12px 15px;background:#1b1b1b;border:1px solid #292929;color:#707070;line-height:23px;font-size:12px;}
+#debug strong{color:#999;font-weight:normal;}.ok{color:#68a878}.bad{color:#b77a70}.wait{color:#aa9569}
+.note{margin-top:14px;color:#666;line-height:23px;}
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/flv.js@1.6.2/dist/flv.min.js"></script>
+<script type="text/javascript">
+var params={};var roomData=null;var streamData=null;var player=null;var roomLoaded=false;var profileTimer=null;
+function esc(s){s=(s===null||typeof s==='undefined')?'':String(s);return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');}
+function parseQuery(){var q=location.search.replace(/^\?/,'').split('&'),i,p,k,v;for(i=0;i<q.length;i++){if(!q[i])continue;p=q[i].split('=');k=decodeURIComponent(p[0]||'');v=decodeURIComponent((p.slice(1).join('=')||'').replace(/\+/g,' '));params[k]=v;}}
+function setStatus(text,cls){document.getElementById('message').innerHTML=esc(text)+'<small>MCPCBox GitHub 直播兼容播放器</small>';var d=document.getElementById('debug-status');d.className=cls||'';d.innerHTML=esc(text);}
+function dbg(name,val,cls){var el=document.getElementById(name);if(el){el.className=cls||'';el.innerHTML=esc(val);}}
+function showInfo(){document.getElementById('room-title').innerHTML=esc(params.title||('虎牙直播间 '+(params.room||'')));document.getElementById('room-meta').innerHTML=esc((params.nick||'虎牙主播')+(params.count?('　'+params.count+'人气'):'')+(params.room?('　房间号 '+params.room):''));if(params.cover){document.getElementById('cover').style.backgroundImage='url("'+params.cover.replace(/\"/g,'')+'")';}}
+function stopPlayer(){try{if(player){player.pause();player.unload();player.detachMediaElement();player.destroy();}}catch(e){}player=null;}
+function playFlv(url,label){stopPlayer();streamData=url;dbg('debug-stream',label||'HTTP-FLV','ok');dbg('debug-url',url,'ok');if(typeof flvjs==='undefined'){setStatus('flv.js 没有加载成功，无法建立播放器。','bad');dbg('debug-flv','未加载','bad');return;}dbg('debug-flv','已加载 '+(flvjs.version||''),'ok');if(!flvjs.isSupported()){setStatus('当前盒子网页内核不支持 Media Source Extensions，无法使用 FLV 播放器。','bad');dbg('debug-mse','不支持','bad');return;}dbg('debug-mse','支持','ok');document.getElementById('cover').style.display='none';document.getElementById('shade').style.display='none';document.getElementById('message').style.display='none';var video=document.getElementById('video');try{player=flvjs.createPlayer({type:'flv',isLive:true,url:url,cors:true,withCredentials:false},{enableWorker:false,enableStashBuffer:false,stashInitialSize:128});player.attachMediaElement(video);player.on(flvjs.Events.ERROR,function(type,detail,info){document.getElementById('message').style.display='block';document.getElementById('shade').style.display='block';setStatus('播放失败：'+type+' / '+detail,'bad');dbg('debug-error',(info&&info.msg)?info.msg:(detail||type),'bad');});player.load();var p=player.play();if(p&&p['catch']){p['catch'](function(){dbg('debug-error','浏览器阻止了自动播放，请点击“播放/重试”。','wait');});}dbg('debug-error','等待视频数据...','wait');}catch(e){setStatus('建立 FLV 播放器失败：'+(e.message||e),'bad');dbg('debug-error',e.message||String(e),'bad');}}
+function parseAnti(s){return s||'';}
+function chooseStream(data){try{var list=data&&data.stream&&data.stream.baseSteamInfoList;if(!list||!list.length)return false;var i,s;for(i=0;i<list.length;i++){s=list[i];if(s&&s.sFlvUrl&&s.sStreamName){var base=String(s.sFlvUrl).replace(/^http:/i,'https:');var anti=parseAnti(s.sFlvAntiCode);var url=base+'/'+s.sStreamName+'.'+(s.sFlvUrlSuffix||'flv')+(anti?('?'+anti):'');playFlv(url,'虎牙签名 FLV / '+(s.sCdnType||'CDN'));return true;}}}catch(e){dbg('debug-error','解析直播流失败：'+(e.message||e),'bad');}return false;}
+function mcboxRoomCallback(obj){roomLoaded=true;if(profileTimer)window.clearTimeout(profileTimer);try{if(obj&&obj.status==200&&obj.data){roomData=obj.data;dbg('debug-api','JSONP 成功','ok');if(!chooseStream(obj.data)){tryBackup('接口没有可用 FLV 流');}}else{tryBackup('房间接口返回异常');}}catch(e){tryBackup('房间数据解析失败');}}
+function requestByCors(){var url='https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid='+encodeURIComponent(params.room||'');try{if(window.XDomainRequest){var xdr=new XDomainRequest();xdr.timeout=6000;xdr.onload=function(){try{var obj=eval('('+xdr.responseText+')');roomLoaded=true;dbg('debug-api','XDomainRequest 成功','ok');if(!chooseStream(obj.data)){tryBackup('接口没有可用 FLV 流');}}catch(e){tryBackup('XDomainRequest 数据解析失败');}};xdr.onerror=function(){tryBackup('XDomainRequest 跨域失败');};xdr.ontimeout=function(){tryBackup('XDomainRequest 超时');};xdr.open('GET',url);window.setTimeout(function(){xdr.send();},0);return;}var xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300){try{var obj=eval('('+xhr.responseText+')');roomLoaded=true;dbg('debug-api','CORS XHR 成功','ok');if(!chooseStream(obj.data)){tryBackup('接口没有可用 FLV 流');}}catch(e){tryBackup('XHR 数据解析失败');}}else{tryBackup('XHR 跨域失败 HTTP '+xhr.status);}}};xhr.open('GET',url,true);xhr.send(null);}catch(e){tryBackup('跨域请求不可用');}}
+function requestRoom(){if(!params.room){tryBackup('没有取得直播间房间号');return;}dbg('debug-api','正在尝试 JSONP...','wait');var sc=document.createElement('script');sc.type='text/javascript';sc.charset='utf-8';sc.id='room-jsonp';sc.src='https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid='+encodeURIComponent(params.room)+'&callback=mcboxRoomCallback&_='+(new Date().getTime());document.getElementsByTagName('head')[0].appendChild(sc);profileTimer=window.setTimeout(function(){if(!roomLoaded){dbg('debug-api','JSONP 未响应，改试跨域接口...','wait');requestByCors();}},3500);}
+function backupStreamUrl(){var s=params.stream||'';if(!s)return '';return 'https://txtest-xp2p.p2p.huya.com/src/'+encodeURIComponent(s)+'.xs?ratio=4000';}
+function tryBackup(reason){dbg('debug-api',reason,'bad');var u=backupStreamUrl();if(u){setStatus('官方房间接口无法在旧内核中读取，正在尝试备用直播线路...','wait');playFlv(u,'备用 XP2P/FLV');}else{setStatus(reason+'，并且列表数据里没有可用于备用线路的流标识。','bad');dbg('debug-stream','无备用流标识','bad');}}
+function retry(){document.getElementById('cover').style.display='block';document.getElementById('shade').style.display='block';document.getElementById('message').style.display='block';setStatus('正在重新获取直播流...','wait');roomLoaded=false;requestRoom();}
+function playBackup(){var u=backupStreamUrl();if(u){playFlv(u,'手动备用 XP2P/FLV');}else{setStatus('这个直播间没有解析到备用流标识。','bad');}}
+function init(){parseQuery();showInfo();dbg('debug-room',params.room||'未知','ok');dbg('debug-streamid',params.stream||'未提供',params.stream?'ok':'wait');dbg('debug-flv',(typeof flvjs==='undefined')?'未加载':'已加载 '+(flvjs.version||''),(typeof flvjs==='undefined')?'bad':'ok');dbg('debug-mse',(typeof flvjs!=='undefined'&&flvjs.isSupported())?'支持':'待检测',(typeof flvjs!=='undefined'&&flvjs.isSupported())?'ok':'wait');setStatus('正在取得当前直播流...','wait');requestRoom();}
+</script>
+</head>
+<body onload="init()">
+<div id="page">
+ <div class="top"><a class="back" href="./">‹ 返回直播列表</a><span class="title">直播详情</span><span class="tools"><a href="javascript:retry();">刷新直播</a></span></div>
+ <div class="info"><div id="room-title" class="room-title">直播间</div><div id="room-meta" class="meta"></div></div>
+ <div id="player-wrap"><video id="video" controls="controls" autoplay="autoplay"></video><div id="cover"></div><div id="shade"></div><div id="message">正在取得当前直播流...<small>MCPCBox GitHub 直播兼容播放器</small></div></div>
+ <div class="controls"><span class="btn" onclick="retry();">播放 / 重试</span><span class="btn" onclick="playBackup();">备用线路</span><span>如果直播已开播但仍失败，请把下面的“诊断信息”截图给我。</span></div>
+ <div id="debug"><strong>诊断信息</strong><br />房间号：<span id="debug-room"></span>　流标识：<span id="debug-streamid"></span><br />flv.js：<span id="debug-flv"></span>　MSE：<span id="debug-mse"></span>　房间接口：<span id="debug-api">等待</span><br />线路：<span id="debug-stream">等待</span><br />状态：<span id="debug-status">等待</span><br />错误：<span id="debug-error">无</span><br /><span id="debug-url" style="word-break:break-all;"></span></div>
+ <div class="note">这个页面不再加载虎牙新版直播间网页，而是尽量直接把直播视频流交给旧版浏览器内核播放。</div>
+</div>
+</body>
+</html>
